@@ -30,3 +30,18 @@ class BaseDAO(Generic[T]):
             except NotFound:
                 return []
         return stmt.all()
+
+    def get_by_email(self, email: str) -> Optional[T]:
+        return self._db_session.query(self.__model__).get(email)
+
+    def get_all_order_by(self, page: int, filter: Optional[str]):
+        ...
+        # filter = request.args.get('status')
+        # if filter != None and filter == 'new':
+        #     return movie_service.get_all(filter=filter, **page_parser.parse_args())
+        # else:
+        #     return movie_service.get_all(**page_parser.parse_args())
+
+
+
+

@@ -3,5 +3,5 @@ from .user import api as user_ns
 
 __all__ = [
     'auth_ns',
-    'user_ns',
+    'user_ns'
 ]

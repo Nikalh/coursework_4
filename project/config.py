@@ -8,6 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 class BaseConfig:
     SECRET_KEY = os.getenv('SECRET_KEY', 'you-will-never-guess')
+    ALGORITHM = 'HS256'
     JSON_AS_ASCII = False
 
     ITEMS_PER_PAGE = 12
@@ -19,6 +20,7 @@ class BaseConfig:
 
     PWD_HASH_SALT = base64.b64decode("salt")
     PWD_HASH_ITERATIONS = 100_000
+
 
     RESTX_JSON = {
         'ensure_ascii': False,
@@ -39,10 +41,12 @@ class DevelopmentConfig(BaseConfig):
 class ProductionConfig(BaseConfig):
     DEBUG = False
     # TODO: дополнить конфиг
-
+    SECRET_HERE = '249y823r9v8238r9u'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///./movies.db'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ConfigFactory:
-    flask_env = os.getenv('FLASK_ENV')
+    flask_env = os.getenv('FLASK_ENV', 'development')
 
     @classmethod
     def get_config(cls) -> Type[BaseConfig]:
