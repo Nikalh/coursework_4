@@ -27,5 +27,5 @@ class LoqinView(Resource):
 
     def put(self):
         data = request.json
-        header = request.headers.environ.get('HTTP_AUTORIZATION').replace('Bearer ', '')
+        header = request.headers.environ.get('HTTP_AUTHORIZATION').replace('Bearer ', '')
         return user_service.update_password(data=data, refresh_token=header)
